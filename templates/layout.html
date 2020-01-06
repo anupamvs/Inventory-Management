@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="{{ url_for('static',filename='css/style.css') }}" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
+</head>
+<body>
+<div class="navbar-fixed">
+    <nav class="indigo" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo center">
+                {{ config['SITE']['name'] }}
+            </a>
+            <ul id="nav-mobile" class="sidenav sidenav-fixed">
+                <li>
+                    <div class="user-view">
+                        <a><img class="circle" src="{{ url_for('static',filename='images/avtar.png') }}"></a>
+                        <a><span class="black-text name capitalize">{{ current_user.name }}</span></a>
+                        <a><span class="black-text email">{{ current_user.email }}</span></a>
+                    </div>
+                </li>
+
+                <li id="dashboard">
+                    <a href="{{ url_for('home') }}">Dashboard
+                        <i class="material-icons">dashboard</i>
+                    </a>
+                </li>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li id="product">
+                            <a class="collapsible-header">Product<i class="material-icons">local_grocery_store</i><i
+                                    class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li id="product_view"><a href="{{ url_for('view_products') }}">View All<i
+                                            class="material-icons">view_comfy</i></a></li>
+                                    <li id="product_add"><a href="{{ url_for('add_product') }}">Add<i
+                                            class="material-icons">add</i></a></li>
+                                    <li id="product_balance"><a href="{{ url_for('product_balance') }}">Product
+                                        Balance<i class="material-icons">grid_on</i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li id="location">
+                            <a class="collapsible-header">Location<i class="material-icons">my_location</i><i
+                                    class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li id="location_view"><a href="{{ url_for('view_locations') }}">View All<i
+                                            class="material-icons">view_comfy</i></a></li>
+                                    <li id="location_add"><a href="{{ url_for('add_location') }}">Add<i
+                                            class="material-icons">add</i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li id="movement">
+                            <a class="collapsible-header">Product Movements<i class="material-icons">swap_horiz</i><i
+                                    class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li id="movement_view"><a href="{{ url_for('new_movement') }}">New<i
+                                            class="material-icons">add</i></a></li>
+                                    <li id="movement_history"><a href="{{ url_for('product_movements') }}">Old Movements<i
+                                            class="material-icons">history</i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ url_for('logout') }}">Logout
+                        <i class="material-icons">power_settings_new</i>
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+</div>
+<div class="main-div">
+    {% block body %}
+    {% endblock %}
+
+
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="{{ url_for('static',filename='js/script.js')  }}"></script>
+<script src="{{ url_for('static',filename='js/jquery.timeago.js')  }}"></script>
+
+<script>
+    invent.init();
+</script>
+<script>
+{% block script %}
+{% endblock %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+        M.toast({html: '{{message}}!', classes: 'rounded {{category}}'});
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+</script>
+</body>
+</html>

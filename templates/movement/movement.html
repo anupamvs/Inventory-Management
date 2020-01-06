@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block title %}
+    New Movement
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <form method="post" action="/productmovement/new/" onsubmit="return invent.movement.submit()">
+                <div class="row card p-25 rounded   ">
+                    <div class="input-field col s12">
+                        <h4 class="center-align">
+                            Product Movement
+                        </h4>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <select name="from" id="from">
+                            <option value="0" selected>None</option>
+                            {% for location in locations %}
+                                <option value="{{location.id}}">{{location.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>From</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <select name="to" id="to">
+                            <option value="0" selected>None</option>
+                            {% for location in locations %}
+                                <option value="{{location.id}}">{{location.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>To</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <select name="product" id="pname">
+                            <option value="" disabled selected>Choose Product</option>
+                            {% for product in products %}
+                                <option value="{{product.id}}">{{product.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Product</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <input id="quantity" type="text" name="quantity">
+                        <label for="quantity">Quantity</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <button type="submit" class="btn right indigo">Move</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+{% block script %}
+    $("#movement").addClass("active");
+    $("#movement_view").addClass("light-blue lighten-4");
+{% endblock %}

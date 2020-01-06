@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}
+{{location.name}}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <form method="post" action="/location/{{ location.id }}">
+                <div class="row card p-25 rounded   ">
+                    <div class="input-field col s12">
+                        <h4 class="center-align">
+                            {{ location.name }}
+                        </h4>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="location_name" type="text" name="location_name" value="{{ location.name }}">
+                        <label for="location_name">location Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <textarea id="location_description" class="materialize-textarea"
+                                  name="location_description">{{ location.description }}</textarea>
+                        <label for="location_description">location Description</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <button type="submit" class="btn right indigo">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

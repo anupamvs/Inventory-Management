@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block title %}
+Locations
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h4>Locations</h4>
+                </li>
+                {% if locations.items %}
+                {% for location in locations.items %}
+                    <li class="collection-item">
+                            <div>
+                                {{ location.name }}
+                                <a class="secondary-content m-l-20 red-text lighten-1-text" href="/location/delete/{{location.id}}">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                                <a class="secondary-content m-l-20 light-green-text" href="/location/{{location.id}}">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                            </div>
+                    </li>
+                {% endfor %}
+                {% else %}
+                   <li class="collection-item">
+                       No Location Available
+                   </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% if locations.pages>1 %}
+    <div class="row">
+        <div class="col s12">
+            <ul class="pagination center-align">
+                {% if not locations.page==1 %}
+                    <li class="waves-effect"><a href="{{ url_for('view_locations', page=locations.prev_num) }}"><i class="material-icons">chevron_left</i></a></li>
+                {% endif %}
+                {% for x in range(1,locations.pages+1) %}
+                    {% if locations.page == x %}
+                        <li class="active waves-effect"><a href="{{ url_for('view_locations', page=x) }}">{{x}}</a></li>
+                    {% else %}
+                        <li class="waves-effect"><a href="{{ url_for('view_locations', page=x) }}">{{x}}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if not locations.page==locations.pages %}
+                    <li class="waves-effect"><a href="{{ url_for('view_locations', page=locations.next_num) }}"><i class="material-icons">chevron_right</i></a></li>
+                {% endif %}
+              </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block script %}
+    $("#location").addClass("active");
+    $("#location_view").addClass("light-blue lighten-4");
+{% endblock %}

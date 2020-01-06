@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block title %}
+Product Balance
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            {% if product_balance %}
+            <table class="striped highlight centered">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Warehouse</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for pbl in product_balance %}
+                <tr>
+                    <td>{{pbl.product.name}}</td>
+                    <td>{{pbl.location.name}}</td>
+                    <td>{{pbl.quantity}}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            {% else %}
+            <h5 class="center-align">No Record Available</h5>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    $("#product").addClass("active");
+    $("#product_balance").addClass("light-blue lighten-4");
+{% endblock %}

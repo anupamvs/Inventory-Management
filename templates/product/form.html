@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block title %}
+New Product
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <form method="post" action="/product/new/" onsubmit="return invent.product.submit()">
+                <div class="row card p-25 rounded   ">
+                    <div class="input-field col s12">
+                        <h4 class="center-align">
+                            Add Product
+                        </h4>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="product_name" type="text" name="product_name">
+                        <label for="product_name">Product Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <textarea id="product_description" class="materialize-textarea"
+                                  name="product_description"></textarea>
+                        <label for="product_description">Product Description</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <button type="submit" class="btn right indigo">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    $("#product").addClass("active");
+    $("#product_add").addClass("light-blue lighten-4");
+{% endblock %}

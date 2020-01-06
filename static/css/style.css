@@ -1,0 +1,98 @@
+nav {
+    line-height : 64px;
+    height: 64px;
+}
+
+nav .nav-wrapper {
+    height: 64px;
+}
+
+.sidenav.sidenav-fixed {
+    top: 64px;
+}
+
+.sidenav li>a{
+    padding: 0 16px;
+}
+
+.main-div{
+    padding: 15px;
+}
+
+@media only screen and (min-width: 992px){
+    .main-div{
+        margin-left: 300px;
+    }
+}
+
+.p-25{
+    padding: 25px;
+}
+.m-l-20{
+    margin-left:20px;
+}
+.rounded{
+    border-radius: 10px;
+}
+
+input:not([type]):focus:not([readonly])+label,
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=url]:not(.browser-default):focus:not([readonly])+label,
+input[type=time]:not(.browser-default):focus:not([readonly])+label,
+input[type=date]:not(.browser-default):focus:not([readonly])+label,
+input[type=datetime]:not(.browser-default):focus:not([readonly])+label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label,
+input[type=tel]:not(.browser-default):focus:not([readonly])+label,
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+input[type=search]:not(.browser-default):focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
+ color: #424242;
+
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+ border-bottom:1px solid #424242;
+ -webkit-box-shadow:0 1px 0 0 red;
+ box-shadow:0 1px 0 0 #424242;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: #424242;
+}
+
+.success{
+    background-color: #33691e !important;
+    color : white !important;
+}
+
+.warning{
+    background-color: #ffeb3b !important;
+    color : black !important;
+}
+
+.error{
+    background-color: #d32f2f !important;
+    color : white !important;
+}
+
+.pagination li.active {
+    background-color: #3f51b5;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}

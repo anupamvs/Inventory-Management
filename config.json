@@ -1,0 +1,14 @@
+{
+    "SITE" : {
+      "name" : "Inventory",
+      "tag_line" : ""
+    },
+    "DB" : {
+      "user" : "root",
+      "password" : "root",
+      "provider" : "docs_inventory"
+    },
+  "GLOBAL" : {
+      "page_limit" : 12
+  }
+}

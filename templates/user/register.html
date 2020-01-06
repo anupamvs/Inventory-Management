@@ -1,0 +1,42 @@
+{% extends 'user/layout.html' %}
+{% block title %}
+    Register
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 l6 offset-m2 offset-l3" style="margin-top: 100px;">
+            <form method="post" action="{{ url_for('register') }}" onsubmit="return invent.register.submit()">
+                <div class="row card p-25 rounded   ">
+                    <div class="input-field col s12">
+                        <h4 class="center-align">
+                           {{ config['SITE']['name'] }} | Register
+                        </h4>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="name" type="text" name="name" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="password" type="password" name="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="cnfpassword" type="password" name="cnfpassword" required>
+                        <label for="cnfpassword">Confirm Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="email" type="email" name="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <button type="submit" class="btn right indigo">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}

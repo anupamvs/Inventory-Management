@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block title %}
+Products
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h4>Products</h4>
+                </li>
+                {% if products %}
+                    {% for product in products.items %}
+                    <li class="collection-item">
+                        <div>
+                            {{ product.name }}
+                            <a class="secondary-content m-l-20 red-text lighten-1-text"
+                               href="/product/delete/{{product.id}}">
+                                <i class="material-icons">delete</i>
+                            </a>
+                            <a class="secondary-content m-l-20 light-green-text" href="/product/{{product.id}}">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="collection-item">
+                        No Product Available
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% if products.pages>1 %}
+    <div class="row">
+        <div class="col s12">
+            <ul class="pagination center-align">
+                {% if not products.page==1 %}
+                    <li class="waves-effect"><a href="{{ url_for('view_products', page=products.prev_num) }}"><i class="material-icons">chevron_left</i></a></li>
+                {% endif %}
+                {% for x in range(1,products.pages+1) %}
+                    {% if products.page == x %}
+                        <li class="active waves-effect"><a href="{{ url_for('view_products', page=x) }}">{{x}}</a></li>
+                    {% else %}
+                        <li class="waves-effect"><a href="{{ url_for('view_products', page=x) }}">{{x}}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if not products.page==products.pages %}
+                    <li class="waves-effect"><a href="{{ url_for('view_products', page=products.next_num) }}"><i class="material-icons">chevron_right</i></a></li>
+                {% endif %}
+              </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block script %}
+    $("#product").addClass("active");
+    $("#product_view").addClass("light-blue lighten-4");
+{% endblock %}
