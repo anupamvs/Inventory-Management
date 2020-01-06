@@ -3,7 +3,45 @@
 Dashboard
 {% endblock %}
 {% block body %}
+<div class="row">
+    <div class="col s12 m4 l4">
+        <div class="card z-depth-3">
+            <div class="card-content">
+                <span class="card-title">Products</span>
+            </div>
+            <div class="card-action">
+                <h1 class="right-align">
+                    {{products}}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4 l4">
+        <div class="card z-depth-3">
+            <div class="card-content">
+                <span class="card-title">Locations</span>
+            </div>
+            <div class="card-action">
+                <h1 class="right-align">
+                    {{locations}}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4 l4">
+        <div class="card z-depth-3">
+            <div class="card-content">
+                <span class="card-title">Movements</span>
+            </div>
+            <div class="card-action">
+                <h1 class="right-align">
+                    {{movements}}
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block script %}
-    $("#dashboard").addClass("active");
+$("#dashboard").addClass("active");
 {% endblock %}

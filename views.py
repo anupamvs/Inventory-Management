@@ -2,7 +2,7 @@ from myapp import app, db, login_manager
 from flask import render_template, request, redirect, url_for, flash
 from models import *
 import json
-from flask_login import login_user, logout_user, current_user, login_required
+from flask_login import login_user, logout_user, login_required
 import hashlib
 
 
@@ -12,8 +12,10 @@ with open("config.json") as temp:
 @app.route('/')
 @login_required
 def home():
-    print(current_user)
-    return render_template('index.html', config=config)
+    products = Product.query.count()
+    locations = Location.query.count()
+    movements = ProductMovement.query.count()
+    return render_template('index.html', config=config, products=products, locations=locations, movements=movements)
 
 @app.route('/productmovements/')
 @app.route('/productmovements/<int:page>')
@@ -30,6 +32,8 @@ def new_movement():
 
     (from_location, to_location, product, quantity) = ("", "", "", "")
     if request.method == "POST":
+
+        # Validating Inputs
         from_location = int(request.form.get("from", ""))
         to_location = int(request.form.get("to", ""))
         product = request.form.get("product", "")
@@ -50,6 +54,7 @@ def new_movement():
             if not to_location:
                 to_location = None
 
+            # move things in the location
             if to_location and not from_location:
                 product_location = db.session.query(Products).filter_by(location_id=to_location, product_id=product).first()
                 if not product_location :
@@ -58,6 +63,8 @@ def new_movement():
                 else:
                     product_location.quantity += quantity
                 flash(u'Movement Successful.', 'success')
+
+            # move things out from the location
             elif from_location and not to_location:
                 product_location = db.session.query(Products).filter_by(location_id=from_location, product_id=product).first()
                 if not product_location :
@@ -71,6 +78,8 @@ def new_movement():
 
                     product_location.quantity -= quantity
                     flash(u'Movement Successful.', 'success')
+
+            # move things between locations
             else:
                 source_location = db.session.query(Products).filter_by(location_id=from_location,
                                                                         product_id=product).first()
@@ -82,13 +91,12 @@ def new_movement():
                     if source_location.quantity < quantity:
                         flash(u'Quantity is more than available.', 'error')
                         return redirect(url_for('new_movement'))
-                    dest_location = db.session.query(Products).filter_by(location_id=to_location,
-                                                                            product_id=product).first()
+                    dest_location = db.session.query(Products).filter_by(location_id=to_location,product_id=product).first()
+                    source_location.quantity -= quantity
                     if not dest_location:
                         dest_location = Products(location_id=to_location, product_id=product, quantity=quantity)
                         db.session.add(dest_location)
                     else:
-                        source_location.quantity -= quantity
                         dest_location.quantity += quantity
                     flash(u'Movement Successful.', 'success')
 
@@ -159,9 +167,10 @@ def view_products(page=1):
 
 
 @app.route('/products/balance/')
+@app.route('/products/balance/<int:page>')
 @login_required
-def product_balance():
-    product_balance = Products.query.all()
+def product_balance(page=1):
+    product_balance = Products.query.order_by(Products.location_id).paginate(page, config['GLOBAL']['page_limit'], error_out=False)
 
     return render_template('product/balance.html', config=config, product_balance=product_balance)
 # End Product Routing
@@ -236,7 +245,7 @@ def register():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('user/login.html')
+        return render_template('user/login.html', config=config)
     email = request.form.get('email')
     password = request.form.get('password')
     password = (hashlib.md5(password.encode())).hexdigest()
