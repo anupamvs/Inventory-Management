@@ -1,18 +1,19 @@
 # Inventory-Management
 
 ## Screens
-#### Login
-| Login |
-|   :---:      |
+
+| ###Login |
+|   :---   |
 | ![Login](static/images/login.png) |
 
+| #### Movement Form |
+|   :---   |
+| ![makemovement](static/images/makemovement.png) |
 
+| #### Movements |
+|   :---   |
+| ![movements](static/images/momements.png) |
 
-#### Movement Form
-![makemovement](static/images/makemovement.png)
-
-#### Movements
-![movements](static/images/momements.png)
-
-#### Product Balance
-![productbalance](static/images/product_balance.png)
+| #### Product Balance |
+|   :---   |
+| ![productbalance](static/images/product_balance.png) |
