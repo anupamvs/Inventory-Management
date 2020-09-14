@@ -2,7 +2,8 @@
 
 ## Screens
 #### Login
-![Login](static/images/login.png)
+|![Login](static/images/login.png)|
+-
 
 #### Movement Form
 ![makemovement](static/images/makemovement.png)
